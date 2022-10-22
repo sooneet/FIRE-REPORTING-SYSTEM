@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate,login,logout
 
 
 # Create your views here.
+def dashboard(request):
+    return render(request,'admin/dashboard.html')
+
 def admin_login(request):
     error = ''    
     if request.method == 'POST':
@@ -15,13 +18,12 @@ def admin_login(request):
         try:
             if user.is_staff:
                 login(request,user)
-                return HttpResponse('dashboard')
+                return redirect('dashboard')
                 error = 'no'
         except:
             error = 'yes'
 
     return render(request,'admin_login.html')
-
 
 def index(request):
     return render(request,'index.html')
