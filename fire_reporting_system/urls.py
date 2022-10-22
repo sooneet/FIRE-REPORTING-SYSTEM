@@ -12,5 +12,6 @@ urlpatterns = [
 
     path('add-team/',add_team,name='add-team'),
     path('manage-team/',manage_team,name='manage-team'),
+    path('edit-team/<int:pid>/',edit_team,name='edit-team'),
 
 ]

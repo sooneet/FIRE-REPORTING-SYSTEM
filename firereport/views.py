@@ -6,6 +6,30 @@ from django.contrib.auth import authenticate,login,logout
 
 
 # Create your views here.
+def edit_team(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('index') 
+    teams = Teams.objects.get(id=pid) 
+
+    error = '' 
+    if request.method == 'POST':
+        teamName = request.POST.get('teamName')
+        teamLeaderName = request.POST.get('teamLeaderName')
+        teamLeadMobno = request.POST.get('teamLeadMobno')
+        teamMembers = request.POST.get('teamMembers')   
+
+        teams.teamName = teamName
+        teams.teamLeaderName = teamLeaderName
+        teams.teamLeadMobno = teamLeadMobno
+        teams.teamMembers = teamMembers
+
+        try:
+            teams.save()
+            error = 'no'                                
+        except:
+            error = 'yes'              
+    return render(request,'admin/edit_team.html',locals())
+
 def manage_team(request):
     if not request.user.is_authenticated:
         return redirect('index') 
