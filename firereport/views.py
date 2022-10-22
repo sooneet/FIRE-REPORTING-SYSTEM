@@ -6,6 +6,13 @@ from django.contrib.auth import authenticate,login,logout
 
 
 # Create your views here.
+def delete_team(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('index') 
+    teams = Teams.objects.get(id=pid)
+    teams.delete()           
+    return redirect('manage-team')
+
 def edit_team(request,pid):
     if not request.user.is_authenticated:
         return redirect('index') 
