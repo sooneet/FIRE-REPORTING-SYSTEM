@@ -9,5 +9,6 @@ urlpatterns = [
     path('',index,name='index'),
     path('admin-login/',admin_login,name='admin-login'),
     path('dashboard/',dashboard,name='dashboard'),
+    path('add-team/',add_team,name='add-team'),
 
 ]
