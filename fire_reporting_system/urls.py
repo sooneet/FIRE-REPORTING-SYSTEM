@@ -7,4 +7,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('',index,name='index'),
+    path('admin-login/',admin_login,name='admin-login'),
+
 ]
