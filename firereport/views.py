@@ -1,11 +1,32 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from . models import Firereport, Teams, firereport
+from . models import Firereport, Teams
 from django.db.models import Q
 from django.contrib.auth import authenticate,login,logout
 
 
 # Create your views here.
+def new_request(request):
+    if not request.user.is_authenticated:
+        return redirect('dashboard')
+    firereport = Firereport.objects.filter(Status__isnull=True)    
+    return render(request,'admin/new_request.html',locals())
+
+def reporting(request):
+    error = ""
+    if request.method == "POST":
+        FullName = request.POST['FullName']
+        MobileNumber = request.POST['MobileNumber']
+        Location = request.POST['Location']
+        Message = request.POST['Message']
+        try:
+            fire= Firereport.objects.create(FullName=FullName, MobileNumber=MobileNumber, Location=Location, Message=Message)
+            fire.save()
+            error = "no"
+        except:
+            error = "yes"
+    return render(request, 'reporting.html', locals())
+
 def delete_team(request,pid):
     if not request.user.is_authenticated:
         return redirect('index') 

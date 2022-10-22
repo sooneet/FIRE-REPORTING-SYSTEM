@@ -15,4 +15,8 @@ urlpatterns = [
     path('edit-team/<int:pid>/',edit_team,name='edit-team'),
     path('delete-team/<int:pid>/',delete_team,name='delete-team'),
 
+    path('reporting/',reporting,name='reporting'),
+
+    path('new-request/',new_request,name='new-request'),
+
 ]
