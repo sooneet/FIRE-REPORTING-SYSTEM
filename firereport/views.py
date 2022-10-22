@@ -6,6 +6,12 @@ from django.contrib.auth import authenticate,login,logout
 
 
 # Create your views here.
+def manage_team(request):
+    if not request.user.is_authenticated:
+        return redirect('index') 
+    teams = Teams.objects.all()           
+    return render(request,'admin/manage_team.html',locals())
+
 def add_team(request):
     if not request.user.is_authenticated:
         return redirect('index')
@@ -21,7 +27,7 @@ def add_team(request):
             error = 'no'                                   
         except:
             error = 'yes'       
-    return render(request,'admin/add_team.html')
+    return render(request,'admin/add_team.html',locals())
 
 def dashboard(request):
     if not request.user.is_authenticated:
